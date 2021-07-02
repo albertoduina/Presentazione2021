@@ -1,0 +1,109 @@
+<!-- Ant makefile for Presentazione2021 2021-06-28 -->
+<project name="Presentazione2021" default="main">
+	<echo message="------------------------------" />
+	<echo message="project= ${ant.project.name}" />
+	<echo message="------------------------------" />
+
+	<!-- Definizioni property -->
+	<property environment="env" />
+	<property name="disk" value="${env.SystemDrive}" />
+	<echo message="disk= ${disk}" />
+
+	<property name="build" location="build" />
+	<echo message="build= ${build}}" />
+
+	<property name="pathImageJ" location="${basedir}\..\imagej1\ij.jar" />
+	<echo message="pathImageJ= ${pathImageJ}" />
+	<property name="source" location="src/MyPackage" />
+
+	<property name="distribuzione" location="distribuzione" />
+	<echo message="basedir= ${basedir}" />
+
+	<tstamp>
+		<format property="time.stamp" pattern="yyyyMMMdd_HHmm" />
+	</tstamp>
+	<echo message="tstamp= ${time.stamp}" />
+
+
+	<!-- ##############			MAIN ROUTINE 		############## -->
+	<target name="main" depends="init, compile, move1, jarrer, cond_WIN7" />
+
+
+	<!-- cancellazione e nuova creazione delle directory di lavoro, in modo che siano vuote" -->
+	<target name="init" description="initialize">
+		<echo message="Eseguo INIT" />
+		<buildnumber />
+		<tstamp />
+		<delete dir="${build}" />
+		<mkdir dir="${build}" />
+		<delete dir="${distribuzione}" />
+		<mkdir dir="${distribuzione}" />
+		<property name="productDirWIN7" location="${disk}\Programmi2\ImageJ\plugins" />
+		<available file="${productDirWIN7}" type="dir" property="win7" />
+		<echo message="win7=${win7}" />
+	</target>
+
+
+	<target name="compile" description="Compile everything.">
+		<!--javac srcdir="${source}" destdir="${output}" optimize="on" target="1.8" source="1.8" encoding="iso8859-1" debug="on" classpath="${pathImageJ}" /-->
+
+		<!-- Build everything; add debug="on" to debug -->
+		<javac srcdir="${source}" 
+			debug="off" 
+			includeAntRuntime="false"
+			destdir="${build}" 
+			optimize="on" 
+			target="1.8" 
+			source="1.8"
+			encoding="iso8859-1" 
+			classpath="${pathImageJ}" />
+	</target>
+
+	<!-- MOVE1 move the sources into build -->
+	<target name="move1" description="Move the sources.">
+		<copy verbose="true" todir="${build}">
+			<fileset dir="." includes=" *.txt , *.pdf, *.rtf, *.number, *.jpg, *.xml, *.config, *.csv" />
+		</copy>
+	</target>
+
+	<!-- Create MANIFEST and JARS application  -->
+	<target name="jarrer" description="JARs the Task">
+		<echo message=">>>> Eseguo jarrer" />
+		<delete file="MANIFEST.MF" />
+		<property name="version.num" value="1.1" />
+		<manifest file="MANIFEST.MF">
+			<attribute name="Built-By" value="${user.name}" />
+			<attribute name="Built-Date" value="${TODAY}" />
+			<attribute name="Main-Class" value="myPackage.MyClass" />
+			<attribute name="Implementation-Version" value="b${build.number}" />
+		</manifest>
+
+		<jar destfile="${build}/MyClass_${time.stamp}.jar" manifest="MANIFEST.MF">
+			<fileset dir="${build}" />
+		</jar>
+		<delete dir="${build}/myProject" />
+		<copy todir="${distribuzione}">
+			<fileset dir="${build}" includes="*.jar" />
+		</copy>
+	</target>
+
+	<target name="distribution" description="Jar distribution">
+		<copy todir="${distribuzione}">
+			<fileset dir="${build}" includes="*.jar" />
+		</copy>
+	</target>
+
+	<target name="cond_WIN7" depends="init" if="win7">
+		<echo message="Eseguo cond_WIN7" />
+		<delete failonerror="false" verbose="true">
+			<fileset dir="${productDirWIN7}/MyProject">
+				<include name="*.jar" />
+			</fileset>
+		</delete>
+		<copy todir="${productDirWIN7}/MyProject">
+			<fileset dir="${distribuzione}" includes="*.jar" />
+		</copy>
+	</target>
+
+</project>
+
