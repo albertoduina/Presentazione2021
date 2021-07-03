@@ -15,7 +15,7 @@ public class MyClass implements PlugIn {
 
 	public void run(String arg) {
 		
-		new WaitForUserDialog("SCIAO PIRLA!!!").show();
+		new WaitForUserDialog("CIAO").show();
 		IJ.log("Questo è il main della Classe MyClass");
 		IJ.showMessage("Questo è il messaggio della MyClass");
 	}

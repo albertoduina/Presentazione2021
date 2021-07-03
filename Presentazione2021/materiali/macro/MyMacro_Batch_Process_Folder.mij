@@ -4,28 +4,28 @@
 // This macro processes all the images in a folder and any subfolders.
 // 
 
-  extension = ".tif";							// la macro processerà solo i file con estensione .tif
+  extension = ".tif";									// la macro processerà solo i file con estensione .tif
   dir1 = getDirectory("Choose Source Directory ");		// chiede all'operatore di selezionare una cartella
   //dir2 = getDirectory("Choose Destination Directory ");		// comando commentato, non viene eseguito al pari di questi commenti
-  setBatchMode(true);						// la macro verrà eseguita senza mai aggiornare lo schermo, questo garantisce la velocità
-  n = 0;									// imposta una variabile a 0
-  processFolder(dir1);						// eseguirà la funzione processFolder, passandole come parametro  il nome della cartella selezionata
+  setBatchMode(true);									// la macro verrà eseguita senza mai aggiornare lo schermo, questo garantisce la velocità
+  n = 0;												// imposta una variabile a 0
+  processFolder(dir1);									// eseguirà la funzione processFolder, passandole come parametro  il nome della cartella selezionata
 
-  function processFolder(dir1) {					// dichiarazione della funzione processFolder, dovrà ricevere una variabile a cui assegna il nome (interno) dir1 
-									// casualmente uguale al nome dir1 visibile nel programma principale
-     list = getFileList(dir1);						// acquisisce la lista dei nomi oggetti presenti nella cartella dir1
+  function processFolder(dir1) {						// dichiarazione della funzione processFolder, dovrà ricevere una variabile a cui assegna il nome (interno) dir1 
+														// casualmente uguale al nome dir1 visibile nel programma principale
+     list = getFileList(dir1);							// acquisisce la lista dei nomi oggetti presenti nella cartella dir1
      for (i=0; i<list.length; i++) {					// ciclo for che verrà eseguito per ogni nome file contenuto in list
           if (endsWith(list[i], "/"))					// se un nome finisce con / vuol dire che è una cartella e ....
-              processFolder(dir1+list[i]);					// alla funzione processFolder viene passato il path della sottocartella estraendolo dall'array dei nomi
-          else if (endsWith(list[i], extension))				// se un nome finisce con .tif vuol dire che è una immagine e ...
-             processImage(dir1, list[i]);					// alla funzione processImage verranno passati sia il path della cartella, che il nome immagine, estraendolo dall'array dei nomi 
+              processFolder(dir1+list[i]);				// alla funzione processFolder viene passato il path della sottocartella estraendolo dall'array dei nomi
+          else if (endsWith(list[i], extension))		// se un nome finisce con .tif vuol dire che è una immagine e ...
+             processImage(dir1, list[i]);				// alla funzione processImage verranno passati sia il path della cartella, che il nome immagine, estraendolo dall'array dei nomi 
       }
   }
 
-  function processImage(dir1, name) {				// dichiarazione della funzione processImage, dovrà ricevere due variabili, dir1 col nome cartella e name, col nome immagine
-     open(dir1+name);						// apertura della immagine
-     print(n++, name);							// stampa del nome in posizione n e successivo incremento variabile n
-     // add code here to analyze or process the image		// commento x i programmatori che vogliono aggiungere funzioni
-     //saveAs(extension, dir2+name);				// commento
-     close();								// chiusura immagine
+  function processImage(dir1, name) {					// dichiarazione della funzione processImage, dovrà ricevere due variabili, dir1 col nome cartella e name, col nome immagine
+     open(dir1+name);									// apertura della immagine
+     print(n++, name);									// stampa del nome in posizione n e successivo incremento variabile n
+     // add code here to analyze or process the image	// commento x i programmatori che vogliono aggiungere funzioni
+     //saveAs(extension, dir2+name);					// commento
+     close();											// chiusura immagine
   }

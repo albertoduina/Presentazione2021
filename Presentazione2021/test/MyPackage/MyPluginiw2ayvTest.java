@@ -25,8 +25,7 @@ public class MyPluginiw2ayvTest {
 
 		My_Pluginiw2ayv myPluginiw2ayv = new My_Pluginiw2ayv();
 		myPluginiw2ayv.main();
-		IJ.wait(10000);
-//		assertTrue(UtilAyv.compareVectors(expected, result, ""));
+		//		assertTrue(UtilAyv.compareVectors(expected, result, ""));
 	}
 
 
