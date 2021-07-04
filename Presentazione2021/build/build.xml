@@ -12,12 +12,19 @@
 	<property name="build" location="build" />
 	<echo message="build= ${build}}" />
 
-	<property name="pathImageJ" location="${basedir}\..\imagej1\ij.jar" />
+	<echo message="basedir= ${basedir}" />
+
+	
+	<property name="workspace" location="${basedir}\..\..\..\eclipse-workspace\" />
+	<echo message="workspace= ${workspace}" />
+	
+	
+	
+	<property name="pathImageJ" location="${workspace}\imagej\ij.jar" />
 	<echo message="pathImageJ= ${pathImageJ}" />
 	<property name="source" location="src/MyPackage" />
 
 	<property name="distribuzione" location="distribuzione" />
-	<echo message="basedir= ${basedir}" />
 
 	<tstamp>
 		<format property="time.stamp" pattern="yyyyMMMdd_HHmm" />

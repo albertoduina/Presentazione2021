@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import ij.plugin.DICOM;
 import ij.plugin.filter.*;
 
-public class MyPluginFilterWithCalculations1 implements PlugInFilter {
+public class MyPluginFilterWithCalculations implements PlugInFilter {
 	ImagePlus imp;
 
 	public int setup(String arg, ImagePlus imp) {
