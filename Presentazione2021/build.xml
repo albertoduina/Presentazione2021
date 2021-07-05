@@ -1,3 +1,10 @@
+<!-- ============================================== -->
+<!-- Ant makefile for Presentazione2021 2021-06-28  -->
+<!-- Presuppone che Presentazione2021 sia sotto git -->
+<!-- ed anche imagej sia sotto git                  -->
+<!-- ============================================== -->
+
+
 <!-- Ant makefile for Presentazione2021 2021-06-28 -->
 <project name="Presentazione2021" default="main">
 	<echo message="------------------------------" />
@@ -15,7 +22,7 @@
 	<echo message="basedir= ${basedir}" />
 
 	
-	<property name="workspace" location="${basedir}\..\..\..\eclipse-workspace\" />
+	<property name="workspace" location="${basedir}\..\..\" />
 	<echo message="workspace= ${workspace}" />
 	
 	
