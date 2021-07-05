@@ -9,12 +9,15 @@ import ij.plugin.PlugIn;
 public class My_Pluginiw2ayv implements PlugIn {
 
 	public void run(String arg) {
+		// secondo commit
+		// ulteriore commit lo possino !!
 
 		main();
 
 	}
 
 	public void main() {
+		// commento aggiunto per commit
 
 		new WaitForUserDialog("ECCOMI, sono il vostro affezionato My_Pluginiw2ayv").show();
 
