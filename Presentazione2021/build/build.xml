@@ -1,3 +1,10 @@
+<!-- ============================================== -->
+<!-- Ant makefile for Presentazione2021 2021-06-28  -->
+<!-- Presuppone che Presentazione2021 sia sotto git -->
+<!-- ed anche imagej sia sotto git                  -->
+<!-- ============================================== -->
+
+
 <!-- Ant makefile for Presentazione2021 2021-06-28 -->
 <project name="Presentazione2021" default="main">
 	<echo message="------------------------------" />
@@ -11,14 +18,10 @@
 
 	<property name="build" location="build" />
 	<echo message="build= ${build}}" />
-
 	<echo message="basedir= ${basedir}" />
-
 	
-	<property name="workspace" location="${basedir}\..\..\..\eclipse-workspace\" />
+	<property name="workspace" location="${basedir}\..\..\" />
 	<echo message="workspace= ${workspace}" />
-	
-	
 	
 	<property name="pathImageJ" location="${workspace}\imagej\ij.jar" />
 	<echo message="pathImageJ= ${pathImageJ}" />
@@ -33,7 +36,13 @@
 
 
 	<!-- ##############			MAIN ROUTINE 		############## -->
-	<target name="main" depends="init, compile, move1, jarrer, cond_WIN7" />
+	<target name="main" 
+		depends="init, 
+		compile, 
+		move1, 
+		jarrer, 
+		cond_WIN7" >
+	</target>
 
 
 	<!-- cancellazione e nuova creazione delle directory di lavoro, in modo che siano vuote" -->

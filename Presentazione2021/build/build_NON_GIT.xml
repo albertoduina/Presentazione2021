@@ -1,11 +1,8 @@
 <!-- ============================================== -->
 <!-- Ant makefile for Presentazione2021 2021-06-28  -->
 <!-- Presuppone che Presentazione2021 sia sotto git -->
-<!-- ed anche imagej sia sotto git                  -->
-<!-- ============================================== -->
-
-
-<!-- Ant makefile for Presentazione2021 2021-06-28 -->
+<!-- e quindi sia variata la cartella !!            -->
+<!-- ============================================  -->
 <project name="Presentazione2021" default="main">
 	<echo message="------------------------------" />
 	<echo message="project= ${ant.project.name}" />
@@ -18,16 +15,13 @@
 
 	<property name="build" location="build" />
 	<echo message="build= ${build}}" />
-	<echo message="basedir= ${basedir}" />
-	
-	<property name="workspace" location="${basedir}\..\..\" />
-	<echo message="workspace= ${workspace}" />
-	
-	<property name="pathImageJ" location="${workspace}\imagej\ij.jar" />
+
+	<property name="pathImageJ" location="${basedir}\..\imagej1\ij.jar" />
 	<echo message="pathImageJ= ${pathImageJ}" />
 	<property name="source" location="src/MyPackage" />
 
 	<property name="distribuzione" location="distribuzione" />
+	<echo message="basedir= ${basedir}" />
 
 	<tstamp>
 		<format property="time.stamp" pattern="yyyyMMMdd_HHmm" />
@@ -36,13 +30,7 @@
 
 
 	<!-- ##############			MAIN ROUTINE 		############## -->
-	<target name="main" 
-		depends="init, 
-		compile, 
-		move1, 
-		jarrer, 
-		cond_WIN7" >
-	</target>
+	<target name="main" depends="init, compile, move1, jarrer, cond_WIN7" />
 
 
 	<!-- cancellazione e nuova creazione delle directory di lavoro, in modo che siano vuote" -->
